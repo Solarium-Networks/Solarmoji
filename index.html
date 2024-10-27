@@ -49,14 +49,35 @@
             const output = document.getElementById('output');
             let comment = commentBox.value;
 
-            // Check if the comment contains the _angry_ Solarmoji
-            if (comment.includes('_angry_')) {
-                // Replace _angry_ with the image tag for the emoji
-                const angryEmoji = '<img src="https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/angry.svg" alt="Angry Solarmoji" width="25" height="25">';
-                comment = comment.replace(/_angry_/g, angryEmoji);
-            }
+            // List of available emoji IDs and their corresponding SVG links
+            const emojiList = {
+                'angry': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/angry.svg',
+                'crying': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/crying.svg',
+                'expressionless': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/expressionless.svg',
+                'eyeroll': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/eyeroll.svg',
+                'frown': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/frown.svg',
+                'laugh': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/laugh.svg',
+                'mybad': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/mybad.svg',
+                'neutral': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/neutral.svg',
+                'rofl': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/rofl.svg',
+                'shocked': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/shocked.svg',
+                'shout': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/shout.svg',
+                'smile-grinning-bigeyes': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/smile-grinning-bigeyes.svg',
+                'smile-grinning': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/smile-grinning.svg',
+                'smile-grinning-teeth': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/smile-grinning-teeth.svg',
+                'smile': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/smile.svg',
+                'smirk': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/smirk.svg',
+                'tears': 'https://raw.githubusercontent.com/Solarium-Networks/Solarmoji/main/svg/tears.svg'
+            };
 
-            // Display the comment with the inline emoji
+            // Replace each emoji id in the comment with the corresponding image
+            Object.keys(emojiList).forEach(id => {
+                const emojiImg = `<img src="${emojiList[id]}" alt="${id} Solarmoji" width="25" height="25">`;
+                const regex = new RegExp(`_${id}_`, 'g');
+                comment = comment.replace(regex, emojiImg);
+            });
+
+            // Display the comment with the inline emojis
             output.innerHTML = `<p>${comment}</p>`;
 
             // Save to session storage to persist state
@@ -71,7 +92,7 @@
             const savedComment = sessionStorage.getItem('savedComment');
             if (savedComment) {
                 document.getElementById('commentBox').value = savedComment;
-                submitComment(); // Display the saved comment with the emoji if it exists
+                submitComment(); // Display the saved comment with the emojis if it exists
                 sessionStorage.removeItem('savedComment'); // Remove it so it disappears on reload
             }
         };
