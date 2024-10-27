@@ -47,19 +47,20 @@
         function submitComment() {
             const commentBox = document.getElementById('commentBox');
             const output = document.getElementById('output');
-            const comment = commentBox.value;
+            let comment = commentBox.value;
 
             // Check if the comment contains the _angry_ Solarmoji
             if (comment.includes('_angry_')) {
-                output.innerHTML = `
-                    <p>${comment.replace('_angry_', '')}</p>
-                    <img src="https://github.com/Solarium-Networks/Solarmoji/blob/main/svg/angry.svg" alt="Angry Solarmoji" width="50" height="50">
-                `;
-                // Save to session storage to persist state
-                sessionStorage.setItem('savedComment', comment);
-            } else {
-                output.innerHTML = `<p>${comment}</p>`;
+                // Replace _angry_ with the image tag for the emoji
+                const angryEmoji = '<img src="https://github.com/Solarium-Networks/Solarmoji/blob/main/svg/angry.svg" alt="Angry Solarmoji" width="25" height="25">';
+                comment = comment.replace(/_angry_/g, angryEmoji);
             }
+
+            // Display the comment with the inline emoji
+            output.innerHTML = `<p>${comment}</p>`;
+
+            // Save to session storage to persist state
+            sessionStorage.setItem('savedComment', comment);
 
             // Clear the comment box after submission
             commentBox.value = '';
