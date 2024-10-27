@@ -7,3 +7,5 @@ We made some emojis!
 Yes, of course!
 <h1>Can I contribute</h1>
 Yes, of course! We are planning on making an emoji template to make it easy to make more emojis!!!
+<h1>website:</h1>
+[Solarmoji web](https://solarium-networks.github.io/Solarmoji/)
