@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solarmoji-web</title>
+
+    <!-- Google Fonts: Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Apply the Roboto font to the entire body */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Basic styling for the text box and output area */
+        #commentBox {
+            width: 100%;
+            height: 100px;
+            font-family: 'Roboto', sans-serif;
+        }
+        #output {
+            margin-top: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <p>See the chat box below? In that, you can enter emojis!</p>
+    <p>To get a Solarmoji to pop up after entering text, do this:</p>
+    <p>Type an underscore: _ and then type the emoji id example: angry then another underscore _</p>
+    <p>The result should look like this: _angry_</p>
+    <p>Have fun with the emojis!</p>
+
+    <!-- Text box for user input -->
+    <textarea id="commentBox" placeholder="Type your comment with emojis here..."></textarea>
+    <button onclick="submitComment()">Submit</button>
+
+    <!-- Area to display the output -->
+    <div id="output"></div>
+
+    <a href="https://example.com">Learn about all the emoji ids</a> <!-- Do not change this link -->
+
+    <script>
+        // Function to handle comment submission
+        function submitComment() {
+            const commentBox = document.getElementById('commentBox');
+            const output = document.getElementById('output');
+            const comment = commentBox.value;
+
+            // Check if the comment contains the _angry_ Solarmoji
+            if (comment.includes('_angry_')) {
+                output.innerHTML = `
+                    <p>${comment.replace('_angry_', '')}</p>
+                    <img src="https://github.com/Solarium-Networks/Solarmoji/blob/main/svg/angry.svg" alt="Angry Solarmoji" width="50" height="50">
+                `;
+                // Save to session storage to persist state
+                sessionStorage.setItem('savedComment', comment);
+            } else {
+                output.innerHTML = `<p>${comment}</p>`;
+            }
+
+            // Clear the comment box after submission
+            commentBox.value = '';
+        }
+
+        // Load the saved comment on page load
+        window.onload = function() {
+            const savedComment = sessionStorage.getItem('savedComment');
+            if (savedComment) {
+                document.getElementById('commentBox').value = savedComment;
+                submitComment(); // Display the saved comment with the emoji if it exists
+                sessionStorage.removeItem('savedComment'); // Remove it so it disappears on reload
+            }
+        };
+    </script>
+</body>
+</html>
