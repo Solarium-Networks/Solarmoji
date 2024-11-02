@@ -7,4 +7,4 @@ Yes, of course!
 # Can I contribute
 Yes, of course! We are planning on making an emoji template to make it easy to make more emojis!!!
 # website:
-[Solarmoji web](https://solarium-networks.github.io/Solarmoji/)
+[Solarmoji web](https://solarium-networks.github.io/Solarmoji/) <!-- this is just a on-web demo of the emojis to be built into solarium chat engines and solarium travel and more. -->
