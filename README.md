@@ -1,3 +1,4 @@
+<!-- maybe just add the animated one -->
 ![Solarmoji logo](https://github.com/Solarium-Networks/Solarmoji/blob/main/sources/Solarmoji.png?raw=true)
 # Welcome to the Solarmoji repo!
 We made some emojis!
